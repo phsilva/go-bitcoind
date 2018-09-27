@@ -380,6 +380,12 @@ func (b *Bitcoind) GetWork(data ...string) (response interface{}, err error) {
 	return
 }
 
+// ImportAddress
+func (b *Bitcoind) ImportAddress(address string, account string, rescan bool) error {
+	r, err := b.client.call("importaddress", []interface{}{address, account, rescan})
+	return handleError(err, &r)
+}
+
 // ImportPrivKey Adds a private key (as returned by dumpprivkey) to your wallet.
 // This may take a while, as a rescan is done, looking for existing transactions.
 // Optional [rescan] parameter added in 0.8.0.
